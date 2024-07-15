@@ -1,7 +1,9 @@
 ## Install AWS CLI v2 on Cloud9
 
-# run these commands after the DBendpoint is known and the SecretManager steps
-# Update the AWS CLI v2
+run these commands after the DBendpoint is known and the SecretManager steps
+Update the AWS CLI v2
+
+```
 which aws
 ls -l /usr/local/bin/aws
 sudo rm /usr/local/bin/aws
@@ -15,16 +17,20 @@ sudo ./aws/install
 /usr/local/bin/aws --version
 rm awscliv2.zip
 
+```
 
-# Resize Cloud9 Volume to 50G
+Resize Cloud9 Volume to 50G
+```
 source <(curl -s https://raw.githubusercontent.com/aws-samples/aws-swb-cloud9-init/mainline/cloud9-resize.sh)
 
-
+```
 
 
 ## Install IBM Db2 Run Time Client on Cloud9
 
-# Download and Install the IBM Db2 Run Time Client.
+Download and Install the IBM Db2 Run Time Client.
+
+```
 cd
 mkdir db2client
 cd db2client
@@ -39,19 +45,21 @@ echo 'export DB2INSTANCE=ec2-user' >> ~/.bashrc
 source ~/.bashrc
 sudo ./db2_install -f sysreq -y -b $IBM_DB_HOME
 rm ~/db2client/v11.5.9_linuxx64_rtcl.tar.gz
+```
 
-
-## Creating and configuring a Db2 client instance
+# Creating and configuring a Db2 client instance
 
 # Create Db2 Client instance
+```
 cd /opt/ibm/db2/V11.5/instance
 sudo ./db2icrt -s client ec2-user
 db2level
-
+```
 
 ## Catalog Node and Database on Db2 Client Instance
 
-# Catalog Node and RDS Db2 database. use the DBendpoint from step 1
+
+```
 db2 "catalog tcpip node db2node remote <DBEndpoint> server 50000"
 db2 "catalog database <Database name> at node db2node authentication server_encrypt"
 db2 list node directory
@@ -63,9 +71,15 @@ db2 "catalog database rdsadmin at node db2node authentication server_encrypt"
 db2 list node directory
 db2 list database directory
 
+```
 
 ## Connect to RDS Db2 database
+
+```
 db2 "connect to <Database Name> user masteruser using <password>"
 
 db2 "connect to rdsadmin user masteruser using <password>"
+```
+
+
          
