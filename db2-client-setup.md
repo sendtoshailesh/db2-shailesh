@@ -71,14 +71,43 @@ db2 "catalog database rdsadmin at node db2node authentication server_encrypt"
 db2 list node directory
 db2 list database directory
 
+
+db2 "catalog tcpip node db2node remote rds-db2-labs.cfga2u00o7kk.us-east-2.rds.amazonaws.com server 50000"
+db2 "catalog database MYDB2 at node db2node authentication server_encrypt"
+db2 list node directory
+db2 list database directory
+
 ```
 
 ## Connect to RDS Db2 database
 
 ```
+db2 uncatalog db <database_alias>
+
+db2 uncatalog db MYDB2
+
 db2 "connect to <Database Name> user masteruser using <password>"
 
-db2 "connect to rdsadmin user masteruser using <password>"
+db2 "connect to MYDB2 user masteruser using Welcome0"
+
+WSParticipantRole:/opt/ibm/db2/V11.5/instance $ db2 "connect to MYDB2 user masteruser using Welcome0"
+SQL30061N  The database alias or database name "MYDB2             " was not 
+found at the remote node.  SQLSTATE=08004
+WSParticipantRole:/opt/ibm/db2/V11.5/instance $ db2 terminate
+DB20000I  The TERMINATE command completed successfully.
+WSParticipantRole:/opt/ibm/db2/V11.5/instance $ db2 "connect to MYDB2 user masteruser using Welcome0"
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.5.9.0
+ SQL authorization ID   = MASTERUS...
+ Local database alias   = MYDB2
+
+WSParticipantRole:/opt/ibm/db2/V11.5/instance $
+
+
+
+
 ```
 
 
